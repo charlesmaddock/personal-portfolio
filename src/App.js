@@ -1,26 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+// Third party
+import React from "react"
+import SimplexNoise from "simplex-noise"
+// Custom
+import Vegetation from "./components/Vegetation"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const worldHeight = 1000
+const worldWidth = 1400
+
+const noise = {
+  heightMap: new SimplexNoise(Math.random()),
+  heightMapInc: 1/300,
+  fertilityMap: new SimplexNoise(Math.random()),
+  fertilityMapInc: 1/800,
 }
 
-export default App;
+const App = () => {
+  
+  return(
+    <div 
+      style={{
+        width: worldWidth, 
+        height: worldHeight, 
+        margin: 100,
+        position: "relative"
+      }}
+    >
+      <Vegetation 
+        worldWidth={worldWidth}
+        worldHeight={worldHeight}  
+        noise={noise}
+      />
+    </div>
+  )
+}
+
+export default App
