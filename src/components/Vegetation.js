@@ -1,19 +1,21 @@
 import React from "react"
 // Custom 
 import Entity from "./Entity"
+import { SEA_LEVEL } from "../constants"
 
-const vegetationTypes = [
-  {emoji: "🌳", size: 22, minHeight: 0.2, maxHeight: 1, minFertility: 0, maxFertility: 1},
-  {emoji: "🌾", size: 14, minHeight: -0.9, maxHeight: 0, minFertility: 0, maxFertility: 1},
-  {emoji: "🌻", size: 12, minHeight: -0.95, maxHeight: 0.3, minFertility: 0, maxFertility: 1},
-  {emoji: "🌷", size: 12, minHeight: -0.95, maxHeight: 0.3, minFertility: 0, maxFertility: 1},
-  {emoji: "🌱", size: 14, minHeight: -0.9, maxHeight: 0, minFertility: 0, maxFertility: 1},
-  {emoji: "🌵", size: 14, minHeight: -1, maxHeight: 1, minFertility: -1, maxFertility: -0.3},
-  {emoji: "🌴", size: 22, minHeight: 0, maxHeight: 1, minFertility: -0.5, maxFertility: -0.1},
-  {emoji: "🌲", size: 22, minHeight: 0.3, maxHeight: 1, minFertility: 0, maxFertility: 1},
+const defaultVegetationTypes = [
+  {emoji: "🌳", spawnChance: 0.6, size: 22, minHeight: 0.2, maxHeight: 1, minFertility: 0, maxFertility: 0.4},
+  {emoji: "🌾", spawnChance: 0.6, size: 14, minHeight: SEA_LEVEL-0.2, maxHeight: SEA_LEVEL, minFertility: -1, maxFertility: 1},
+  {emoji: "🌻", spawnChance: 0.8, size: 12, minHeight: SEA_LEVEL+ 0.3, maxHeight: 0.3, minFertility: -0.2, maxFertility: 1},
+  {emoji: "🌷", spawnChance: 0.8, size: 12, minHeight: SEA_LEVEL+ 0.3, maxHeight: 0.3, minFertility: 0, maxFertility: 1},
+  {emoji: "🌱", spawnChance: 0.6, size: 14, minHeight: SEA_LEVEL+ 0.3, maxHeight: 1, minFertility: 0, maxFertility: 1},
+  {emoji: "🌵", spawnChance: 0.6, size: 14, minHeight: SEA_LEVEL + 0.3, maxHeight: 1, minFertility: -1, maxFertility: -0.3},
+  {emoji: "🌴", spawnChance: 0.6, size: 22, minHeight: SEA_LEVEL + 0.1, maxHeight: 1, minFertility: -0.5, maxFertility: -0.1},
+  {emoji: "🌲", spawnChance: 0.6, size: 22, minHeight: 0.3, maxHeight: 1, minFertility: 0.3, maxFertility: 1},
+  {emoji: "🗿", spawnChance: 0.8, size: 22, minHeight: SEA_LEVEL + 0.3, maxHeight: 0.5, minFertility: -1, maxFertility: -0.8},
 ]
 
-const Vegetation = ({ worldWidth, worldHeight, noise }) => {
+const Vegetation = ({ worldWidth, worldHeight, noise, vegetationTypes = defaultVegetationTypes }) => {
   const vegetation = []
   const vegetationMaxSize = 24
 
@@ -27,12 +29,11 @@ const Vegetation = ({ worldWidth, worldHeight, noise }) => {
       let xFertilityStep = x * noise.fertilityMapInc
       let yFertilityStep = y * noise.fertilityMapInc
       let fertility = noise.fertilityMap.noise2D(xFertilityStep, yFertilityStep)
-      console.log(fertility);
       
       const randomVegSelection = [
         vegetationTypes[Math.floor(Math.random()*vegetationTypes.length)],
         vegetationTypes[Math.floor(Math.random()*vegetationTypes.length)],
-        {emoji: "  ", size: 24, minHeight: -1, maxHeight: 1, minFertility: -1, maxFertility: 1},
+        vegetationTypes[Math.floor(Math.random()*vegetationTypes.length)],
       ]
 
       for (let i = 0; i < randomVegSelection.length; i++) {
@@ -66,7 +67,9 @@ const canSpawnVegetation = (randomVeg, height, fertility) => {
      fertility > randomVeg.minFertility &&
      fertility < randomVeg.maxFertility
   ){
-    return true
+    if(Math.random() > randomVeg.spawnChance){
+      return true
+    }
   }
   return false
 }
