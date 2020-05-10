@@ -20,7 +20,6 @@ const projectData = [
     title: "Winner of CASTIC",
     year: "2019",
     body: "I represented Sweden in Asia's largest research competition for youth and won gold aswell as the honorary 'President's Award' with my project about simulating ecosystems with AI. ",
-    color: "lightgrey",
     width: 300,
     height: 200,
     emojis: ["💻", "👾", "🐜"]
@@ -28,8 +27,7 @@ const projectData = [
   {
     title: "Digital Ungdom",
     year: "2020",
-    body: "I am currently a broad member in the youth organisation 'Digital Ungdom'. I have  participated in the creation of the organisation's website and online forum.",
-    color: "lightblue",
+    body: "I am currently a broad member in the youth organisation 'Digital Ungdom' in which I have also actively participated in the creation of the organisation's website and online forum.",
     width: 300,
     height: 200,
     emojis: ["💻", "👨🏽‍💻", "🙋"]
@@ -38,7 +36,6 @@ const projectData = [
     title: "Winner of CASTIC",
     year: "2019",
     body: "I represented Sweden in Asia's largest research competition for youth and won gold aswell as the honorary “President's Award” with my project about simulating ecosystems with AI. ",
-    color: "pink",
     width: 300,
     height: 200,
     emojis: ["💻", "👾", "🐜"]
@@ -53,11 +50,13 @@ const App = () => {
   for (let y = 0; y < worldHeight; y+=incY) {
     for (let x = 0; x < worldWidth; x+=incX) {
       if(i < projectData.length){
+        let randX = x + (Math.random() * incX)
+        let randY = y + (Math.random() * incY)
         projects.push(
           <ProjectBiome 
             projectData={projectData[i]}
-            x={x + (Math.random() * incX)}
-            y={y + (Math.random() * incY)}
+            x={randX}
+            y={randY}
           />
         )
         i++
@@ -169,12 +168,6 @@ const ProjectBiome = ({ projectData, x, y }) => {
           {projectData.body}
         </p>
       </div>
-      <Terrain 
-        worldWidth={projectData.width}
-        worldHeight={projectData.height}  
-        noise={noise}
-        solidColor={projectData.color}
-      />
       <Vegetation 
         worldWidth={projectData.width}
         worldHeight={projectData.height}  
