@@ -11,7 +11,7 @@ const projectData = [
     body: (
       <>
         <p>
-          I am currently a broad member in the youth organisation 'Digital Ungdom' in 
+          I am currently a board member in the youth organisation 'Digital Ungdom' in 
           which I have also actively participated in the creation of the organisation's 
           website and online forum.
         </p>
