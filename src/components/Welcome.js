@@ -75,7 +75,7 @@ const Welcome = ({projectData}) => {
               and free to use from my github!
             </p>
             <StyledLink title="See the Github Repository" href="https://github.com/charlesmaddock/personal-portfolio"/>
-            <StyledLink title="Create a issue" href="https://github.com/charlesmaddock/personal-portfolio/issues"/>
+            <StyledLink title="Create an issue" href="https://github.com/charlesmaddock/personal-portfolio/issues"/>
             <StyledLink title="Add your own code to the project!" href="https://github.com/charlesmaddock/personal-portfolio/pulls"/>
           </div>
         </div>
