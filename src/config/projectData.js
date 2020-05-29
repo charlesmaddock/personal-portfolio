@@ -66,7 +66,7 @@ const projectData = [
           I developed the company's mobile application and website and also play 
           an active role in the overall development the company.
         </p>
-        <StyledLink title="clmte.com" href="https://www.clmte.com//">  
+        <StyledLink title="clmte.com" href="https://www.clmte.com/"/>  
       </>      
     ),
     width: 600,
